@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define size 100
 
 int stack[size];
@@ -11,8 +11,7 @@ void stackPush(int x) {
         printf("Stack Overflow\n");
         return;
     }
-    top++;
-    stack[top] = x;
+    stack[++top] = x;
 }
 
 int stackPop() {
@@ -25,21 +24,25 @@ int stackPop() {
 
 void recognize()
 {
-    top = 0;
-    stack[top] = 'c';
-    char nextChar;
+    top = -1; // Reset stack
+    stackPush('c'); // Push marker character
+    char nextChar = '\0';
 
-    while(nextChar != 'c' && nextChar != '\0') {
-        nextChar = getchar();
-        if (nextChar == ' ') {
+    while ((nextChar = getchar()) != '\n' && nextChar != EOF)
+    {
+        if (nextChar == ' ')
+        {
             printf("Invalid String\n");
             return;
-        } else {
+        }
+        else
+        {
             stackPush(nextChar);
         }
-
     }
-    while(stack[top] != 'c') {
+
+    while (top >= 0 && stack[top] != 'c')
+    {
         nextChar = getchar();
         char x = stackPop();
         if (nextChar != x) {
@@ -48,19 +51,22 @@ void recognize()
         }
     }
     nextChar = getchar();
-    if(nextChar == ' ') {
+    if (nextChar == ' ' || nextChar == '\n')
+    {
         printf("Valid String\n");
-    } else {
+    }
+    else
+    {
         printf("Invalid String\n");
     }
 }
- int main() {
+
+int main()
+{
     char str[size];
     while (1) {
-        char str[size];
         fgets(str, size, stdin);
-        if (str[0] == '\n') break; // Exit on empty line
-        recognize(str);
+        if (str[0] == '\n') break;
+        recognize();
     }
-
- }
+}
