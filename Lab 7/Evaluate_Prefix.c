@@ -16,20 +16,20 @@ int pop()
     return stack[top--];
 }
 
-void evaluate_postfix(char postfix[])
+void evaluate_prefix(char prefix[])
 {
     int i;
-    for(i=0; i<strlen(postfix);i++)
+    for(i=0; i<strlen(prefix);i++)
     {
-        if(isdigit(postfix[i]))
-            push(postfix[i] - '0');
+        if(isdigit(prefix[i]))
+            push(prefix[i] - '0');
 
         else
         {
-            int operand2 = pop();
             int operand1 = pop();
+            int operand2 = pop();
 
-            switch (postfix[i])
+            switch (prefix[i])
             {
                 case '+':
                 push(operand1 + operand2);
@@ -57,9 +57,10 @@ void evaluate_postfix(char postfix[])
 
 void main()
 {
-    char postfix[100];
-    printf("Enter a postfix expression: ");
-    scanf("%s", postfix);
-    evaluate_postfix(postfix);
+    char prefix[100];
+    printf("Enter a prefix expression: ");
+    scanf("%s", prefix);
+    strrev(prefix);
+    evaluate_prefix(prefix);
     printf("Answer: %d\n", pop());
 }
