@@ -26,6 +26,75 @@ struct Node* insertNode(struct Node* root, int data) {
     return root;
 }
 
+//search a node in tree
+int Search_in_BST(struct Node * root, int x)
+{
+    if(root == NULL)
+    {
+        // printf("Tree is Empty");
+        return 0;
+    }
+
+    if(x > root->data)
+    {
+        return Search_in_BST(root->right, x);
+    }
+    else if(x < root->data)
+    {
+        return Search_in_BST(root->left, x);
+    }
+    return 1;
+}
+
+//delete a node in tree
+struct Node * delete(struct Node * root, int x)
+{
+     if(root == NULL)
+    {
+        printf("Tree is Empty");
+        return 0;
+    }
+
+    if(x > root->data)
+    {
+        return delete(root->right, x);
+    }
+    else if(x < root->data)
+    {
+        return delete(root->left, x);
+    }
+    else if(root->left==NULL)
+        {
+            struct Node * temp = root->right;
+             free(root);
+            return temp;
+        }
+        else if(root->right==NULL)
+        {
+            struct Node * temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        struct Node* temp = root->right;
+        while (temp && temp->left != NULL) {
+            temp = temp->left;
+        }
+        root->data = temp->data;
+        root->right = delete(root->right, temp->data);
+        return root;
+    }
+    struct Node* temp = root->left;
+    while (temp->right != NULL) {
+        temp = temp->right;
+    }
+    temp->right = root->right;
+    free(root);
+    return temp;
+
+};
+
+
 // Inorder Traversal
 void inorder(struct Node* root) {
     if (root != NULL) {
@@ -63,7 +132,9 @@ int main() {
         printf("2. Inorder Traversal\n");
         printf("3. Preorder Traversal\n");
         printf("4. Postorder Traversal\n");
-        printf("5. Exit\n");
+        printf("5. Search a Node\n");
+        printf("6. delete a Node\n");
+        printf("7. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -94,6 +165,26 @@ int main() {
                 break;
 
             case 5:
+               printf("Search a Node in BST:\n ");
+                printf("Enter data to search: ");
+                scanf("%d", &data);
+                if (Search_in_BST(root, data)) {
+                    printf("Node %d found in the BST.\n", data);
+                } else {
+                    printf("Node %d not found in the BST.\n", data);
+                }
+                printf("Search completed.\n");
+                break;
+
+            case 6:
+                printf("Enter data to delete: ");
+                scanf("%d", &data);
+                root = delete(root, data);
+                printf("Node Deleted.\n");
+                printf("\n");
+                break;
+
+                case 7:
                 printf("Exiting...\n");
                 exit(0);
 
