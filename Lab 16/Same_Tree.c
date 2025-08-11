@@ -53,13 +53,9 @@ int main()
     struct Node* root1 = NULL;
     struct Node* root2 = NULL;
     int choice, data;
-        printf("Enter data for first tree: ");
-        scanf("%d", &data);
-        root1 = insertNode(root1, data);
-        printf("Enter data for second tree: ");
-        scanf("%d", &data);
-        root2 = insertNode(root2, data);
-    while (1) {
+    
+    while (1)
+    {
         printf("\n\n--- Same Tree Menu ---\n");
         printf("1. Insert Node in First Tree\n");
         printf("2. Insert Node in Second Tree\n");
@@ -96,5 +92,5 @@ int main()
             default:
                 printf("Invalid choice. Please try again.\n");
         }
-}
+    }
 }
