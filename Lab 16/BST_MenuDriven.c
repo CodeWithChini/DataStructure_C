@@ -47,53 +47,41 @@ int Search_in_BST(struct Node * root, int x)
 }
 
 //delete a node in tree
-struct Node * delete(struct Node * root, int x)
-{
-     if(root == NULL)
-    {
-        printf("Tree is Empty");
-        return 0;
+struct Node* delete(struct Node* root, int x) {
+    if (root == NULL) {
+        printf("Element not found\n");
+        return NULL;
     }
 
-    if(x > root->data)
-    {
-        return delete(root->right, x);
-    }
-    else if(x < root->data)
-    {
-        return delete(root->left, x);
-    }
-    else if(root->left==NULL)
+    if (x > root->data) {
+        root->right = delete(root->right, x);
+    } else if (x < root->data) {
+        root->left = delete(root->left, x);
+    } else {
+        // Node with only one child or no child
+        if (root->left == NULL)
         {
-            struct Node * temp = root->right;
-             free(root);
+            struct Node* temp = root->right;
+            free(root);
             return temp;
         }
-        else if(root->right==NULL)
+         else if (root->right == NULL)
         {
-            struct Node * temp = root->left;
+            struct Node* temp = root->left;
             free(root);
             return temp;
         }
 
+        // Node with two children: Get inorder successor (smallest in right subtree)
         struct Node* temp = root->right;
         while (temp && temp->left != NULL) {
             temp = temp->left;
         }
         root->data = temp->data;
         root->right = delete(root->right, temp->data);
-        return root;
     }
-    struct Node* temp = root->left;
-    while (temp->right != NULL) {
-        temp = temp->right;
-    }
-    temp->right = root->right;
-    free(root);
-    return temp;
-
-};
-
+    return root;
+}
 
 // Inorder Traversal
 void inorder(struct Node* root) {
