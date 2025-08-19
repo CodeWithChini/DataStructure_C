@@ -16,11 +16,13 @@ struct Node* createNode(int info) {
 
 struct Node* insertNode(struct Node* root, int info) {
     if (root == NULL)
-        return createNode(info);
+   {
+         return createNode(info);
+    }
     if (info < root->info)
-        root->left = insertNode(root->left, info);
+   {     root->left = insertNode(root->left, info);}
     else
-        root->right = insertNode(root->right, info);
+   {     root->right = insertNode(root->right, info);}
     return root;
 }
 
