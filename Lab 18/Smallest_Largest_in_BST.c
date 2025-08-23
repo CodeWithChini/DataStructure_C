@@ -1,3 +1,5 @@
+// 80. WAP to find the smallest and largest elements in the Binary Search Tree.
+
 #include<stdio.h>
 #include<stdlib.h>
 
