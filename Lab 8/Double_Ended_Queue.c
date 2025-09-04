@@ -6,23 +6,23 @@ int arr[n], front = -1, rear = -1;
 
 void insertAtFront()
 {
-    if(front == 0) // Changed condition - only prevent insertion if front is at index 0
-    {
-        printf("Deque Overflow at front end\n");
-        return;
-    }
+   if((front == 0 && rear == n-1) || front == rear + 1)  
+{
+    printf("Dequeue is full\n");
+    return;
+}
 
     int x;
     printf("Enter value to be inserted at front: ");
     scanf("%d", &x);
 
-    if(front == -1) // Deque is empty
+    if(front == -1)
     {
         front = rear = 0;
     }
     else
     {
-        front--; // Move front backwards
+        front--;
     }
     arr[front] = x;
     return;
@@ -56,7 +56,7 @@ int deleteFromFront()
 {
     if(front == -1)
     {
-        printf("Deque Underflow at front end\n");
+        printf("Dequeue Underflow at front end\n");
         return -1;
     }
 
@@ -77,7 +77,7 @@ int deleteFromRear()
 {
     if(front == -1)
     {
-        printf("Deque Underflow at rear end\n");
+        printf("Dequeue Underflow at rear end\n");
         return -1;
     }
 
@@ -94,7 +94,7 @@ int deleteFromRear()
     return val;
 }
 
-void displayDeque()
+void displayQueue()
 {
     if(front == -1)
     {
