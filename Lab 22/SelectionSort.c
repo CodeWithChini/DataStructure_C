@@ -16,7 +16,6 @@ void selectionSort(int input[], int n)
 		}
 	}
     
-	// Swap
 	int temp = input[i];
 	input[i] = input[minIndex];
 	input[minIndex] = temp;
