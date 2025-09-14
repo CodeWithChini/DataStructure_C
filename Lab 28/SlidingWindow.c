@@ -19,6 +19,7 @@ int main()
     }
     int maxSum = currSum;
 
+    //this loop is for sliding window to find max sum of k consecutive elements
     for(int i = k ; i < n ; i++)
     {
         currSum += arr[i] - arr[i - k];
