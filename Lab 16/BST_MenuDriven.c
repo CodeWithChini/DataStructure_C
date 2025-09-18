@@ -31,7 +31,6 @@ int Search_in_BST(struct Node * root, int x)
 {
     if(root == NULL)
     {
-        // printf("Tree is Empty");
         return 0;
     }
 

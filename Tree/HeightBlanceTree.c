@@ -44,7 +44,7 @@ int main() {
     struct Node* root1 = newNode(1);
     root1->left = newNode(2);
     root1->right = newNode(3);
-    root1->left->left = newNode(4);
+    root1->left->left = newNode(40);
     root1->left->right = newNode(5);
 
     if (isBalanced(root1)) {
